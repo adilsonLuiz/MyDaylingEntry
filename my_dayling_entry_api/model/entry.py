@@ -14,13 +14,13 @@ class Entry(Base):
         This class is model to create a new Entry model to insert in table
     """
     #__tablename__ = get_app_config('TABEL_NAME')
-    __tablename__ = 'entry'
+    __tablename__ = application_settings.ENTRY_TABEL_NAME
 
 
     id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
     entryID = Column(String(application_settings.FIELD_CONTENT_ENTRY_SIZE))
-    title = Column(String(100))
-    content = Column(String(100))
+    title = Column(String(application_settings.FIELD_TITLE_SIZE))
+    content = Column(String(application_settings.FIELD_CONTENT_ENTRY_SIZE))
     created = Column(DateTime,default=datetime.now())
 
 

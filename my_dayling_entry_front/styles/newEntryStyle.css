@@ -1,0 +1,95 @@
+.page {
+    background-color: #ebffff;
+
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100vh; /* Define a altura da tela inteira */
+    margin: 0; /* Remove margens padrão do body */
+}
+
+.page__entry-content {
+
+    position: absolute;
+    top: 20%;
+    left: 32%;
+    overflow: auto;
+
+
+
+}
+
+.page__entry-title {
+    position: absolute;
+    left: 43%;
+    top: 10%;
+
+
+}
+
+.page__entry-id-number {
+
+    left: 47%;
+    position: absolute;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 50px;
+    top: 1%;
+}
+
+.page__footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    padding: 70px;
+
+}
+
+
+
+/*IDS Manipulation*/
+
+
+#btn-save {
+    position: absolute;
+    left: 45%;
+    top: 20%;
+    background-color: #069bf5;
+    border: 2px solid black;
+    color: rgb(3, 3, 3);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 40px;
+
+}
+
+
+#entry-title {
+
+    width: 341px;
+    height: 15px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    border-radius: 50px;
+    border-color: black;
+    resize: none;
+}
+
+#entry-content {
+    border: 2px solid #000000;
+    border-radius: 50px;
+    text-align: center;
+    resize: none;
+    padding: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+    
+}
