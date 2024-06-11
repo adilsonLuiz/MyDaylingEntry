@@ -1,0 +1,90 @@
+[2024-06-11 13:25:38,327] INFO _log() L97   [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.7:5000 - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:25:38,330] INFO _log() L97   [33mPress CTRL+C to quit[0m - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:25:41,024] INFO _log() L97   192.168.1.7 - - [11/Jun/2024 13:25:41] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:25:41,154] INFO _log() L97   192.168.1.7 - - [11/Jun/2024 13:25:41] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:25:41,161] INFO _log() L97   192.168.1.7 - - [11/Jun/2024 13:25:41] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:25:41,162] INFO _log() L97   192.168.1.7 - - [11/Jun/2024 13:25:41] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:25:41,326] INFO _log() L97   192.168.1.7 - - [11/Jun/2024 13:25:41] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:25:41,330] INFO _log() L97   192.168.1.7 - - [11/Jun/2024 13:25:41] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:25:46,769] ERROR log_exception() L838  Exception on /new_entry_id [GET] - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\app.py L838 
+Traceback (most recent call last):
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\app.py", line 883, in full_dispatch_request
+    return self.finalize_request(rv)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\app.py", line 902, in finalize_request
+    response = self.make_response(rv)
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\app.py", line 1193, in make_response
+    rv = self.json.response(rv)
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\json\provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\json\provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\adilson\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\json\provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type TypeError is not JSON serializable
+[2024-06-11 13:25:46,773] INFO _log() L97   192.168.1.7 - - [11/Jun/2024 13:25:46] "[35m[1mGET /new_entry_id HTTP/1.1[0m" 500 - - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:27:08,155] INFO _log() L97   [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.7:5000 - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:27:08,156] INFO _log() L97   [33mPress CTRL+C to quit[0m - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:27:09,508] ERROR log_exception() L838  Exception on /new_entry_id [GET] - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\app.py L838 
+Traceback (most recent call last):
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\app.py", line 883, in full_dispatch_request
+    return self.finalize_request(rv)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\app.py", line 902, in finalize_request
+    response = self.make_response(rv)
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\app.py", line 1193, in make_response
+    rv = self.json.response(rv)
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\json\provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\json\provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\adilson\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\flask\json\provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type TypeError is not JSON serializable
+[2024-06-11 13:27:09,511] INFO _log() L97   192.168.1.7 - - [11/Jun/2024 13:27:09] "[35m[1mGET /new_entry_id HTTP/1.1[0m" 500 - - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:37:28,833] INFO _log() L97   [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.7:5000 - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:37:28,834] INFO _log() L97   [33mPress CTRL+C to quit[0m - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:37:31,153] INFO _log() L97   192.168.1.7 - - [11/Jun/2024 13:37:31] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:37:31,279] INFO _log() L97   192.168.1.7 - - [11/Jun/2024 13:37:31] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
+[2024-06-11 13:37:31,287] INFO _log() L97   192.168.1.7 - - [11/Jun/2024 13:37:31] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\Users\adilson\Documents\Programming\Python\FlaskProjects\MyDaylingEntry\venv\Lib\site-packages\werkzeug\_internal.py L97  
