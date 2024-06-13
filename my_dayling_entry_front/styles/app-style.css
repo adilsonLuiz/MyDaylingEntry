@@ -1,3 +1,4 @@
+/************************ Class Manipulation *******************/
 .page {
     background-color: #ebffff;
 
@@ -46,10 +47,20 @@
 
 }
 
+.page__table-entrys {
+    
+    position: absolute;
+    top: 20%;
+    left: 25%;
+}
+
+/************************ IDS Manipulation *******************/
 
 
-/*IDS Manipulation*/
-
+#btn-test {
+    position: absolute;
+    left: 50%;
+}
 
 #btn-save {
     position: absolute;
@@ -92,4 +103,12 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: medium;
     
+}
+
+
+#table-entrys, th, td {
+    border: 1px solid black;
+    width: 1000px;
+    padding: 5px;
+    border-radius: 10px;
 }

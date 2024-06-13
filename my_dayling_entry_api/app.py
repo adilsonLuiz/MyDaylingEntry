@@ -6,7 +6,7 @@ from schemas import *
 from model import Entry
 from config.logger import logger
 from flask_openapi3 import OpenAPI
-
+from flask_cors import CORS
 
 
 app_config = application_settings
@@ -14,10 +14,11 @@ app_config = application_settings
 # Initilize API with the OpenAPI
 app = OpenAPI(__name__, info=app_config.INFORMATION_API)
 
+CORS(app)
 
 # Initialize
 entry_db_session = EntryDatabase()
-
+print(entry_db_session)
     
 # APP ROUTES
 
@@ -28,7 +29,6 @@ def home():
     """
         
     return redirect('/openapi')
-
 
 
 @app.post('/new_entry', tags=[app_config.HOME_TAG],
@@ -67,6 +67,7 @@ def new_entry_id():
     """
         Get new entry id
     """
+    #FIXME não consigo saber se o retorno é o conteudo 200 ou nao
 
     new_entry_id = entry_db_session.get_next_entry_id()
     

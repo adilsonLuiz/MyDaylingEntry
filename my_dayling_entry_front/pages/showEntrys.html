@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show Entrys</title>
+    <link rel="stylesheet" type="text/css" href="../styles/app-style.css">
 </head>
-<body>
-    <h1>Show Entrys Page</h1>
-    
+<body class="page">
+    <button id="btn-test" onclick="generateRow()"> GENERATE ROW</button>
+    <div class="page__table-entrys">
+        <table id="table-entrys">
+            <tr>
+                <th>Entry ID</th>
+                <th>Entry Title</th>
+                <th>Created</th>
+            </tr>
+            <!--Terei de criar de forma dinamica mais linhas se baseando no total de registros do banco-->
+        </table>
+
+    </div>
+
+    <div class="page__footer">
+        <footer>
+
+        </footer>
+    </div>
+    <script type="text/javascript" src="../scripts/dynamic-manipuling.js"></script>
 </body>
 </html>

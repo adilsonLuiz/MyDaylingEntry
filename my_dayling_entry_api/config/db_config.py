@@ -21,3 +21,6 @@ class GlobalDatabaseConfiguration():
 
         # Calculating the Size of the PK PRIMARY FIELD dinamic based on prefix and digit total variables
         self.FIELD_ENTRY_ID_SIZE = int(len(self.PRE_FIX_TO_ID_GENERATE) + self.DIGIT_TO_ID_GENERATE)
+        
+        self.INITAL_DATA_TO_POPULATE_DATABASE = 10
+        self.INITAL_DATABASE_CHARGE = True

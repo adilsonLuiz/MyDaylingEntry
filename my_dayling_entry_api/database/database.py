@@ -19,6 +19,10 @@ class Database(DevelopementConfiguration):
     def __init__(self) -> None:
         super().__init__()
         
+        # Attributes
+        self.database_needs_populate = False
+        self.database_have_any_data = False
+        
     
     def check_database_is_empty(self):
         raise NotImplemented('Needs Implement in Derived Class')
@@ -44,12 +48,24 @@ class Database(DevelopementConfiguration):
     def record_contain_string(self, contain_word: str, table_model: object):
         raise NotImplemented('Needs Implement in Derived Class')
     
+    def populate_database(self):
+        raise NotImplemented('Needs Implement in Derived Class')
     
-# Entry db table
+    def __str__(self) -> str:
+        return f"""\n
+        <------------- DATABASE DEBUG ------------->
+        Database Needs Populate: {self.database_needs_populate}
+        Database have any data: {self.database_have_any_data}
+    
+        """
+        
+
 class EntryDatabase(Database):
     """
         Entry Database management
+        Derivate class from Database, to concentre management in Entry Database
     """
+
     
     def __init__(self):
         
@@ -64,28 +80,61 @@ class EntryDatabase(Database):
 
         # Check if database exist
         if not database_exists(self.engine.url):
+            
             create_database(self.engine.url)
+            self.database_needs_populate = True
+            base.Base.metadata.create_all(self.engine) # Create Table
 
-
-        
-        base.Base.metadata.create_all(self.engine) # Create Table
+            
+        # Create database session
         Session = sessionmaker(bind=self.engine) 
         self.session = Session()
+        
+ 
+        
+        
+        # Check if the database can received inital charge
+        if self.database_needs_populate and self.INITAL_DATABASE_CHARGE:
+            self.populate_database()
+        
+
         self.database_have_any_data = self.have_any_record(Entry)
         
         
+        
+    def populate_database(self):
+        
+        """
+            Make charge inital data if the database is new
+        """
+        
+        for recordIndex in range(0, self.INITAL_DATA_TO_POPULATE_DATABASE + 1):
+            
+            # Generate temp entry ID linke DAY0001 to put in EntryID field in table
+            temp_entry_id = self.PRE_FIX_TO_ID_GENERATE + str(recordIndex).zfill(self.DIGIT_TO_ID_GENERATE)
+            
+            record = Entry(
+                entryID= temp_entry_id,
+                title='Populate initial',
+                content='Populate initial'
+            )
+            
+            self.session.add(record)
+            self.session.commit()
+
+    
     def have_any_record(self, model: Entry):
         """
             If exist any record in database return True
         
         """
+        #TODO essa função vai morrer depois que implementar outra para popular o banco
         result = self.session.query(exists().where(model.id != None)).scalar()
         
         if result:
             return True
         else:
             return False
-    
 
 
     def get_last_entry(self) -> Entry:
@@ -101,8 +150,6 @@ class EntryDatabase(Database):
         else:
             return database_empty_error()
 
-
-            
     
     def get_record_by_field(self, field: str, valuer:str) -> Entry:
         """
@@ -128,11 +175,6 @@ class EntryDatabase(Database):
         else:
             return False
     
-    
-
-        
-        
-        
     
     def get_next_entry_id(self):
         """
@@ -160,7 +202,8 @@ class EntryDatabase(Database):
             return record_not_found_error()
             
         
-
+    def __str__(self) -> str:
+        return super().__str__()
 
     
 
