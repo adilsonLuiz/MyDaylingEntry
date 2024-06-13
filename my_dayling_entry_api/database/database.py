@@ -180,10 +180,11 @@ class EntryDatabase(Database):
         """
             Get new entry ID incremented
         """
-
+        #FIXME não ta claro o retorno da função, se é um erro ou se é o PREFIX ID
+        
+        
         have_record_with_prefix = self.record_contain_string(self.PRE_FIX_TO_ID_GENERATE, Entry)
         
-        print('Database have any record: ' + str(self.database_have_any_data))
         print('Have any record with this prefix: ' + str(have_record_with_prefix))
         
         if self.database_have_any_data and have_record_with_prefix:

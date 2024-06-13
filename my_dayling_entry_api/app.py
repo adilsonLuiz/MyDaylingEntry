@@ -60,12 +60,15 @@ def new_entry(form: NewEntrySchema):
          return {'mesage': err}
 
 
-@app.get('/new_entry_id', tags=[app_config.GET_ID_TO_NEW_ENTRY], 
+@app.get('/generate_new_entry_id', tags=[app_config.GET_ID_TO_NEW_ENTRY], 
           responses={'200': GetNewIDToEntry, '400': ErrorSchema}
           )
-def new_entry_id():
+def generate_new_entry_id():
     """
-        Get new entry id
+        Get next entry ID free and return it
+        EX: 
+        Last entryID: DAY0001
+        Return is: DAY0002
     """
     #FIXME não consigo saber se o retorno é o conteudo 200 ou nao
 
