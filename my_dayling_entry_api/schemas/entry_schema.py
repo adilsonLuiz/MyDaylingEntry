@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from model.entry import Entry
 from config import application_settings
+from flask import jsonify
 
 
 
@@ -12,8 +13,8 @@ class NewEntrySchema(BaseModel):
         the parameters has expeted in function
     """
     entryID: str = application_settings.ENTRY_ID_EXAMPLE
-    title: str = 'My new dayling entry'
-    content: str = 'My day today was realy cool'
+    title: str = 'My new dayling entry SCHEMA'
+    content: str = 'My day today was realy cool SCHEMA'
 
 
 
@@ -39,6 +40,6 @@ def show_entry(entry: Entry):
 
 def show_entry_id(new_id: str):
     
-    return {
-        'entryID': new_id
-    }
+    return jsonify({
+                    'entryID': new_id
+                    })

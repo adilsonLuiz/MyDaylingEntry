@@ -1,5 +1,6 @@
 
 from sqlalchemy import create_engine, exists
+from sqlalchemy.exc import MultipleResultsFound
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, create_database
 from model import Entry, base
@@ -11,8 +12,10 @@ import os
 
 # Database configuration
 class Database(DevelopementConfiguration):
-    """
-        Base Database manipulation
+    """_summary_
+
+    Args:
+        DevelopementConfiguration Herance: Herance from this class
     """
 
 
@@ -90,8 +93,6 @@ class EntryDatabase(Database):
         Session = sessionmaker(bind=self.engine) 
         self.session = Session()
         
- 
-        
         
         # Check if the database can received inital charge
         if self.database_needs_populate and self.INITAL_DATABASE_CHARGE:
@@ -99,7 +100,6 @@ class EntryDatabase(Database):
         
 
         self.database_have_any_data = self.have_any_record(Entry)
-        
         
         
     def populate_database(self):
@@ -164,16 +164,27 @@ class EntryDatabase(Database):
             return record_not_found_error()
     
 
-    def record_contain_string(self, contain_word: str, table_model: Entry):
+    def record_contain_string(self, contain_word: str, table_model: Entry, field: str):
+        """
+         If record cointain any character in parameter contain_word, return True
+         
+         @parameters:
+            contain_word: Any string like search
+            table_model: Object with the table model
+            field: field in Table model to search data
+        """
         
-        
-        result = self.session.query(table_model).filter(
-                            table_model.entryID.like(f'%{contain_word}%')).scalar()
-        
-        if result:
+        try: # Trying make a query to search the word getattr(Entry, field)
+            self.session.query(table_model).filter(
+                                getattr(table_model, field).like(f'%{contain_word}%'))
+            
             return True
-        else:
+        except MultipleResultsFound: # If found one o more return True
+            return True
+        
+        except Exception as error: # Any another error return False
             return False
+        
     
     
     def get_next_entry_id(self):
@@ -183,7 +194,7 @@ class EntryDatabase(Database):
         #FIXME não ta claro o retorno da função, se é um erro ou se é o PREFIX ID
         
         
-        have_record_with_prefix = self.record_contain_string(self.PRE_FIX_TO_ID_GENERATE, Entry)
+        have_record_with_prefix = self.record_contain_string(self.PRE_FIX_TO_ID_GENERATE, Entry, 'entryID')
         
         print('Have any record with this prefix: ' + str(have_record_with_prefix))
         

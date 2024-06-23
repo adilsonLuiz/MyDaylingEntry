@@ -1,5 +1,5 @@
 
-from flask import redirect, Flask
+from flask import redirect, Flask,  request
 from database.database import EntryDatabase, Database
 from config import  application_settings
 from schemas import *
@@ -35,48 +35,60 @@ def home():
           responses={'200':NewEntrySchema, '409': ErrorSchema, '400': ErrorSchema}
         )
 def new_entry(form: NewEntrySchema):
-     """
-         Add new Entry to database
-     """
+    """Add new Entry to database
+    """
 
-     # Build new product
-     new_entry = Entry(
-         entryID=form.entryID,
-         title=form.title,
-         content=form.content)
-
-     logger.debug(f'Adding new Entry to DB..')
-   
-     try: # Try conect with the database and insert new Entry
-
-         entry_db_session.session.add(new_entry)
-         entry_db_session.session.commit()
-         logger.debug('New Entry add sucessfull!')
-         # Call my schema to show the entry
-         return show_entry(new_entry), 200
     
-     except Exception as err:
-         logger.warning(f'An error is occurrend durant insert..')
-         return {'mesage': err}
+    # Get request informations
+    print('Request content: ' + str(request))
+    #data = request.get_json()
+    
+    #Build new product
+    new_entry = Entry(
+        entryID=form.entryID,
+        title=form.title,
+        content=form.content
+        )
+    
+    # new_entry = Entry(
+    #     entryID= data.get('entryID'),
+    #     title= data.get('title'),
+    #     content= data.get('content')
+    #     )
+
+    logger.debug(f'Adding new Entry to DB..')
+
+    try: # Try conect with the database and insert new Entry
+
+        entry_db_session.session.add(new_entry)
+        entry_db_session.session.commit()
+        logger.debug('New Entry add sucessfull!')
+        # Call my schema to show the entry
+        return show_entry(new_entry), 200
+
+    except Exception as err:
+            logger.warning(f'An error is occurrend durant insert..')
+            return {'mesage': err}
 
 
 @app.get('/generate_new_entry_id', tags=[app_config.GET_ID_TO_NEW_ENTRY], 
           responses={'200': GetNewIDToEntry, '400': ErrorSchema}
           )
 def generate_new_entry_id():
-    """
-        Get next entry ID free and return it
-        EX: 
-        Last entryID: DAY0001
-        Return is: DAY0002
+    """Return new entryID genereted.
+
+    Returns:
+        str: Object
     """
     #FIXME não consigo saber se o retorno é o conteudo 200 ou nao
 
     new_entry_id = entry_db_session.get_next_entry_id()
-    
-    if new_entry:
-        return show_entry_id(new_entry_id), 200
+
+    if new_entry_id:
+        print('Retornando 200 generate new entry')
+        return show_entry_id(new_entry_id)
     else:
+        print('Retornando 400 generate new entry')
         return 'error', 400
 
 
