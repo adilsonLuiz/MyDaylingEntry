@@ -12,7 +12,7 @@ from flask_cors import CORS
 app_config = application_settings
 
 # Initilize API with the OpenAPI
-app = OpenAPI(__name__, info=app_config.INFORMATION_API)
+app = OpenAPI(__name__, info=app_config.INFO_INFORMATION_API)
 
 CORS(app)
 
@@ -31,17 +31,13 @@ def home():
     return redirect('/openapi')
 
 
-@app.post('/new_entry', tags=[app_config.HOME_TAG],
-          responses={'200':NewEntrySchema, '409': ErrorSchema, '400': ErrorSchema}
+@app.post('/new_entry', tags=[app_config.TAG_ADD_NEW_ENTRY],
+          responses={'200':EntrySchema, '409': ErrorSchema, '400': ErrorSchema}
         )
-def new_entry(form: NewEntrySchema):
+def new_entry(form: EntrySchema):
     """Add new Entry to database
     """
 
-    
-    # Get request informations
-    print('Request content: ' + str(request))
-    #data = request.get_json()
     
     #Build new product
     new_entry = Entry(
@@ -49,12 +45,6 @@ def new_entry(form: NewEntrySchema):
         title=form.title,
         content=form.content
         )
-    
-    # new_entry = Entry(
-    #     entryID= data.get('entryID'),
-    #     title= data.get('title'),
-    #     content= data.get('content')
-    #     )
 
     logger.debug(f'Adding new Entry to DB..')
 
@@ -71,8 +61,8 @@ def new_entry(form: NewEntrySchema):
             return {'mesage': err}
 
 
-@app.get('/generate_new_entry_id', tags=[app_config.GET_ID_TO_NEW_ENTRY], 
-          responses={'200': GetNewIDToEntry, '400': ErrorSchema}
+@app.get('/generate_new_entry_id', tags=[app_config.TAG_GET_ID_TO_NEW_ENTRY], 
+          responses={'200': GetNewIDToEntrySchema, '400': ErrorSchema}
           )
 def generate_new_entry_id():
     """Return new entryID genereted.
@@ -92,5 +82,12 @@ def generate_new_entry_id():
         return 'error', 400
 
 
-        
-        
+@app.get('/entrys', tags=[app_config.TAG_GET_ENTRYS],
+         responses={'200': ListingEntrysSchema, '404': ErrorSchema})
+def get_all_entrys():
+    """Get all entrys in database and return it
+    """
+
+    result = entry_db_session.get_all_data()
+    
+    return result

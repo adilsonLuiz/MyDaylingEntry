@@ -106,9 +106,29 @@
 }
 
 
-#table-entrys, th, td {
+#table-entrys {
+    border: 1px solid black;
+    width: 1200px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #ccc;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+td {
     border: 1px solid black;
     width: 1000px;
     padding: 5px;
     border-radius: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+
+th {
+    border: 1px solid black;
+    width: 1000px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #069bf5;
 }

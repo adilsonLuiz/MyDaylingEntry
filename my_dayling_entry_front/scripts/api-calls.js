@@ -1,11 +1,6 @@
-
-
-
 /*
     Call the API to get database data for entrys
-
 */
-
 
 
 
@@ -34,7 +29,7 @@ function generateNewEntryID() {
 
 }
 
-
+generateNewEntryID();
 
 
 /*
@@ -98,6 +93,72 @@ function postEntryID() {
 }
 
 
+function getAllEntrys() {
 
-generateNewEntryID();
+    const path = window.location.pathname.split("/").pop();
+
+    if (path == 'showEntrys.html') {
+
+        fetch('http://127.0.0.1:5000/entrys', {
+        method: 'get'
+        })
+        .then(response  => response.json())
+        .then(data => { // Sucess response
+  
+
+
+            const tableEntrys = document.getElementById('table-entrys');
+            const entrysData = data['entrys'];
+            const hrefLinkShowEntry = '../pages/showEntry.html';
+            
+            // Create <a> tag and sett the link
+
+
+            // Populate table dinamic with data
+            for (var row = 0; row <= entrysData.length; row++) {
+                
+                // Criação de nova linha
+                const newRow  = document.createElement('tr');
+                
+                
+                const entryIDCell = document.createElement('td');
+                const entryTitleCell = document.createElement('td');
+                const entryCreatedCell = document.createElement('td');
+                
+                // Create EntryID link to append to TD
+                const linkShowEntry = document.createElement('a');
+                linkShowEntry.setAttribute('href', hrefLinkShowEntry);
+                linkShowEntry.text = entrysData[row].entryID;
+    
+                    
+        
+                // Append link to entryID
+                entryIDCell.appendChild(linkShowEntry);
+                entryTitleCell.textContent = entrysData[row].title;
+                entryCreatedCell.textContent = entrysData[row].created;
+                
+
+
+
+   
+                // Apprend element to new row
+                newRow.appendChild(entryIDCell);
+                newRow.appendChild(entryTitleCell);
+                newRow.appendChild(entryCreatedCell);
+                
+                // Append new Row to main table
+                tableEntrys.appendChild(newRow);
+            }
+
+        })
+        .catch((error) => { // Error
+
+            console.log('Error: ' + error);
+        })
+    }
+
+}
+
+getAllEntrys();
+
 

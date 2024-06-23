@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../styles/app-style.css">
+    <title>Show Entry</title>
+</head>
+<body class="page">
+
+    <div class="page__entry-title">
+        <textarea id="entry-title" rows="4" cols="50" ></textarea>
+    </div>
+
+    <div class="page__entry-id-number"></div>
+
+    <div class="page__entry-content">
+        <textarea id="entry-content" rows="30" cols="80" ></textarea>
+    </div>
+
+    <footer class="page__footer">
+        <div class="page__footer__btn-save">
+            <button onclick="postEntryID()" id="btn-save">Inserir nota</button>
+        </div>
+    </footer>
+    <script type="text/javascript" src="../scripts/api-calls.js"></script>
+</body>
+</html>

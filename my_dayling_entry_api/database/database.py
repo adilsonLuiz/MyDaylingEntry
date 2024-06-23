@@ -54,6 +54,9 @@ class Database(DevelopementConfiguration):
     def populate_database(self):
         raise NotImplemented('Needs Implement in Derived Class')
     
+    def get_all_data(self, table_model: object):
+        return NotImplemented('Needs Implement in derived Class')
+    
     def __str__(self) -> str:
         return f"""\n
         <------------- DATABASE DEBUG ------------->
@@ -213,6 +216,18 @@ class EntryDatabase(Database):
         else:
             return record_not_found_error()
             
+    
+    def get_all_data(self):
+        """Get all data in database
+        """
+        entrys = self.session.query(Entry).all()
+        
+        
+        if entrys: # If exist products in database
+            return get_all_entrys(entrys), 200
+        else:
+            return database_empty_error(), 404
+        
         
     def __str__(self) -> str:
         return super().__str__()
