@@ -189,6 +189,22 @@ class EntryDatabase(Database):
             return False
         
     
+    def get_entry(self, entry_id: str) -> Entry:
+        """Get entry in database and return it
+
+        Args:
+            entry_id (str): EntryID to search
+
+        Returns:
+            Entry: Try return the record entry in database
+        """
+        entry_data = self.session.query(Entry).filter(Entry.entryID == entry_id).first()
+        
+        if entry_data:
+            return show_entry(entry_data), 200
+        else:
+            return {'message': 'Entry not found in database brow.'}, 404
+        
     
     def get_next_entry_id(self):
         """

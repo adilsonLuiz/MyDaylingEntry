@@ -3,7 +3,7 @@ from typing import List, Optional
 from model.entry import Entry
 from config import application_settings
 from flask import jsonify
-from datetime import datetime
+
 
 
 
@@ -20,7 +20,6 @@ class EntrySchema(BaseModel):
     created: str = '1999-09-29 09:45:54.547831'
 
 
-
 class GetNewIDToEntrySchema(BaseModel):
     """
         Difine how the ID to new Entry needs return
@@ -35,6 +34,12 @@ class ListingEntrysSchema(BaseModel):
 
     entrys:List[EntrySchema]
 
+
+class EntrySearchSchema(BaseModel):
+    """Define how product is showing.
+    """
+    
+    entryID: str = application_settings.ENTRY_ID_EXAMPLE
 
 
 def get_all_entrys(entrys: List[Entry]):
@@ -58,7 +63,6 @@ def get_all_entrys(entrys: List[Entry]):
         })
 
     return {'entrys': result}
-
 
 
 def show_entry(entry: Entry):

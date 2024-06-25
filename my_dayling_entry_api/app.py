@@ -8,6 +8,7 @@ from config.logger import logger
 from flask_openapi3 import OpenAPI
 from flask_cors import CORS
 
+#TODO criar rota de delete de notas
 
 app_config = application_settings
 
@@ -37,7 +38,7 @@ def home():
 def new_entry(form: EntrySchema):
     """Add new Entry to database
     """
-
+    #TODO migrate the commit to function inside database class
     
     #Build new product
     new_entry = Entry(
@@ -91,3 +92,21 @@ def get_all_entrys():
     result = entry_db_session.get_all_data()
     
     return result
+
+
+@app.get('/entry', tags=[app_config.TAG_ENTRY],
+         responses={'200': EntrySearchSchema, '404': ErrorSchema})
+def get_entry(query: EntrySearchSchema):
+    
+    entry_id = query.entryID
+    
+    
+    # Get entry data
+    result = entry_db_session.get_entry(entry_id)
+    
+    return result
+    
+    
+    
+    
+    

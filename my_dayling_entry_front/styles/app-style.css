@@ -102,17 +102,21 @@
     padding: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: medium;
+
     
 }
 
 
 #table-entrys {
+
     border: 1px solid black;
     width: 1200px;
     padding: 5px;
     border-radius: 10px;
     background-color: #ccc;
-    font-family:Verdana, Geneva, Tahoma, sans-serif
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    height: 500px;
+    
 }
 
 td {

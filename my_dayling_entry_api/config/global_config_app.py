@@ -25,6 +25,7 @@ class GlobalApplicationConfigure(GlobalDatabaseConfiguration):
         self.TAG_ADD_NEW_ENTRY = Tag(name='New Entry', description='Add new Dayling Entrys notes')
         self.TAG_GET_ID_TO_NEW_ENTRY = Tag(name='Get ID to new Entry', description='Get new ID to entry')
         self.TAG_GET_ENTRYS = Tag(name='Entrys data', description='Get All database entrys data')
+        self.TAG_ENTRY = Tag(name='Entry operation', description='Make operation with Entry')
         
         # Swagger DOC Configuration INFOS
         self.INFO_INFORMATION_API = Info(title='My Entry Dayling API', version=self.API_VERSION)
