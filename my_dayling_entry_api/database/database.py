@@ -30,32 +30,50 @@ class Database(DevelopementConfiguration):
     def check_database_is_empty(self):
         raise NotImplemented('Needs Implement in Derived Class')
     
+    
     def get_frist_record(self, model: object):
         raise NotImplemented('Needs Implement in Derived Class')
+
 
     def get_last_entry(self):
         raise NotImplemented('Needs Implement in Derived Class')
     
+    
     def get_record(self, model: object, filter: str):
         raise NotImplemented('Needs Implement in Derived Class')
+    
     
     def record_exist(self, model: object, filter: str):
         raise NotImplemented('Needs Implement in Derived Class')
     
+    
     def get_last_record_date(self):
         raise NotImplemented('Needs Implement in Derived Class')
+    
     
     def have_any_record(self, model: object):
         raise NotImplemented('Needs Implement in Derived Class')
 
+
     def record_contain_string(self, contain_word: str, table_model: object):
         raise NotImplemented('Needs Implement in Derived Class')
+    
     
     def populate_database(self):
         raise NotImplemented('Needs Implement in Derived Class')
     
+    
     def get_all_data(self, table_model: object):
         return NotImplemented('Needs Implement in derived Class')
+    
+    
+    def update_record(self, table_model: object, record: object):
+        raise NotImplemented('Needs Implement in Derived Class')
+    
+    
+    def delete_record(self, table_model: object, record: object):
+        raise NotImplemented('Needs Implement in Derived Class')
+    
     
     def __str__(self) -> str:
         return f"""\n
@@ -244,11 +262,46 @@ class EntryDatabase(Database):
         else:
             return database_empty_error(), 404
         
+    
+    def delete_record(self, entry_id: str):
         
+        result = self.session.query(Entry).filter(Entry.entryID == entry_id).delete()
+        self.session.commit()
+        
+        if result:
+            
+            return {'mesage': f'Entry note {entry_id} has beem deleted from the base.'}, 200
+        
+        else:
+            
+            return {'mesage': 'Entry note not found in database'}, 404
+    
+    
+    def update_record(self, new_title: str, new_content: str, entry_id: str) -> object:
+        """Update Entry Record
+
+        Args:
+            new_title (str): new title for entry
+            new_content (str): New content for entry
+            entry_id (str): Entry id to make query
+
+        Returns:
+            _type_: Object
+        """
+        result = self.session.query(Entry).filter(Entry.entryID == entry_id).first()
+        
+        if result:
+            
+            result.title = new_title
+            result.content = new_content
+            self.session.commit()
+            return {'mesage': f'Entry note {entry_id} update sucefull!'}, 200
+        
+        else:
+            return {'mesage': 'Entry note not found in database'}, 404
+        
+                
+        
+    
     def __str__(self) -> str:
         return super().__str__()
-
-    
-
-    
-

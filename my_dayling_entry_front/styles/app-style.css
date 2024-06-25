@@ -10,9 +10,9 @@
 
 .page__entry-content {
 
-    position: absolute;
+    position:absolute;
     top: 20%;
-    left: 32%;
+    left: 30%;
     overflow: auto;
 
 
@@ -57,9 +57,38 @@
 /************************ IDS Manipulation *******************/
 
 
-#btn-test {
+#btn-update {
     position: absolute;
-    left: 50%;
+    left: 75%;
+    top: 10%;
+    border: 2px solid black;
+    color: rgb(3, 3, 3);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 40px;
+    background-color: forestgreen;
+}
+
+#btn-delete {
+    position: absolute;
+    left: 26%;
+    top: 10%;
+    border: 2px solid black;
+    color: rgb(3, 3, 3);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 40px;
+    background-color: #e93035;
 }
 
 #btn-save {
@@ -135,4 +164,21 @@ th {
     padding: 5px;
     border-radius: 10px;
     background-color: #069bf5;
+}
+
+
+/* Media Queries para ajuste em telas menores */
+@media (max-width: 768px) {
+    .page__entry-title, .page__entry-id-number {
+        font-size: 1.5em;
+    }
+
+    #btn-update, #btn-delete, #btn-save {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    #entry-title, #entry-content {
+        padding: 15px;
+    }
 }

@@ -42,6 +42,21 @@ class EntrySearchSchema(BaseModel):
     entryID: str = application_settings.ENTRY_ID_EXAMPLE
 
 
+class EntryDeleteSchema(BaseModel):
+    """Define how the default response for delete entry
+    """
+    
+    mesage: str
+    entryID: str
+
+class EntryUpdateSchema(BaseModel):
+    """Define how the default response for update entry
+    """
+    
+    entryID: str
+    mesage: str
+    
+
 def get_all_entrys(entrys: List[Entry]):
     """Return all entrys register in database.
 

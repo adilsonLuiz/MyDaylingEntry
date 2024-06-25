@@ -8,6 +8,10 @@
 </head>
 <body class="page">
 
+    <div class="page__buttons">
+        <button onclick="updateEntry()" id="btn-update">Atualizar</button>
+        <button onclick="deleteEntry()" id="btn-delete">Deletar</button>
+    </div>
     <div class="page__entry-id-number"></div>
     
     <div class="page__entry-title">
@@ -21,8 +25,6 @@
     </div>
 
     <footer class="page__footer">
-        <button  id="btn-update">Atualizar nota</button>
-        <button  id="btn-delete">Deletar nota</button>
     </footer>
     <script type="text/javascript" src="../scripts/api-calls.js"></script>
 </body>

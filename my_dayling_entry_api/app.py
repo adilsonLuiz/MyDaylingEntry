@@ -94,7 +94,7 @@ def get_all_entrys():
     return result
 
 
-@app.get('/entry', tags=[app_config.TAG_ENTRY],
+@app.get('/entry', tags=[app_config.TAG_ENTRY_SEARCH],
          responses={'200': EntrySearchSchema, '404': ErrorSchema})
 def get_entry(query: EntrySearchSchema):
     
@@ -107,6 +107,24 @@ def get_entry(query: EntrySearchSchema):
     return result
     
     
+
+@app.delete('/entry', tags=[app_config.TAG_ENTRY_DELETE],
+         responses={'200': EntryDeleteSchema, '404': ErrorSchema})
+def delete_entry(query: EntrySearchSchema):
+    """Delete record in entry db
+
+    Args:
+        query (EntrySearchSchema): parameter query comming from client
+    """
+    result = entry_db_session.delete_record(query.entryID)
     
+    return result
+
+
+@app.put('/entry', tags=[app_config.TAG_ENTRY_UPDATE],
+         responses={'200': EntryUpdateSchema, '404': ErrorSchema})
+def update_entry(query: EntrySearchSchema, form:EntrySchema):
     
+    result = entry_db_session.update_record(form.title, form.content, query.entryID)
     
+    return result

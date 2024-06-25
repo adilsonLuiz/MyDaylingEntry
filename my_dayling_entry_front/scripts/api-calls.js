@@ -5,6 +5,7 @@
 
 // TODO implementar botões de atualizar e deletar nota
 const path = window.location.pathname.split("/").pop();
+const endpoint = 'http://127.0.0.1:5000/'
 
 switch (path) {
     
@@ -21,7 +22,10 @@ switch (path) {
 }
 
 
-
+/*
+    GET Method
+    Generate next entryID to insert
+*/
 function generateNewEntryID() {
     
     fetch('http://127.0.0.1:5000/generate_new_entry_id', {
@@ -44,25 +48,10 @@ function generateNewEntryID() {
 
 
 /*
-    Make post in API with new EntryID
+    POST Method
+    Post new EntryID information in database
 */
 function postEntryID() {
-
-
-    /*
-    ao clicar no botao
-    Coletar todos os valores necessarios para a chamada da API
-    Checar se os valores de titulo e content não estão vazios
-    Se valores estiverem vazios
-        exibir uma mensagme informando que é necessario preencher e não prosseguir
-    senao
-        realizar chamada para API e enviar dados para post
-        se 200
-            informar usuario que nota foi inserida com sucesso
-        se nao
-            informar que houve um erro e para tentar novamente mais tarde
-    */
-
 
     let id = document.getElementsByClassName('page__entry-id-number')[0].innerHTML;
     let entryTitle = document.getElementById('entry-title').value;
@@ -74,8 +63,6 @@ function postEntryID() {
         alert('Verifique se o Titulo ou Conteudo da nota não esta vazio!');
     }
     else {
-        alert('Enviando conteudo...');
-
 
         const newEntryPost = new FormData();
         
@@ -89,7 +76,8 @@ function postEntryID() {
             })
             .then(response  => response.json())
             .then(data => { // Sucess response
-                alert('Nova entrada registrada com sucesso!')
+                alert('Nova entrada registrada com sucesso!');
+                window.location.replace('index.html');
     
             })
             .catch((error) => { // Error
@@ -102,7 +90,10 @@ function postEntryID() {
     
 }
 
-
+/*
+    GET Method
+    Get all Entrys in database
+*/
 function getAllEntrys() {
 
 
@@ -162,7 +153,10 @@ function getAllEntrys() {
 }
 
 
-
+/*
+    GET Method
+    Get unique entryID information
+*/
 function getEntryData() {
 
     entryID = new URLSearchParams(window.location.search).get('entryID');
@@ -189,3 +183,74 @@ function getEntryData() {
 }
 
 
+/*
+    DELETE Method
+    Get unique entryID information
+*/
+function deleteEntry() {
+
+    entryID = new URLSearchParams(window.location.search).get('entryID');
+    confirmDelete = confirm('Deseja realmente deletar a nota atual?');
+
+    if (confirmDelete) {
+
+        fetch('http://127.0.0.1:5000/entry?entryID=' + entryID, {
+            method: 'delete'
+            })
+            .then(response  => response.json())
+            .then(data => { // Sucess response
+                
+                console.log(data);
+                alert('Nota deletada com sucesso');
+                window.location.replace('showEntrys.html');
+    
+            })
+            .catch((error) => { // Error
+                console.log('Error: ' + error);
+            })
+    }
+
+}
+
+
+function updateEntry() {
+
+    entryID = new URLSearchParams(window.location.search).get('entryID');
+ 
+    let entryTitle = document.getElementById('entry-title').value;
+    let entryContet = document.getElementById('entry-content').value;
+
+    if (!entryTitle || !entryContet) { 
+        alert('Verifique se o Titulo ou Conteudo da nota não esta vazio!');
+    }
+    else {
+
+        const updateEntry = new FormData();
+        updateEntry.append('title', entryTitle);
+        updateEntry.append('content', entryContet);
+
+
+        fetch('http://127.0.0.1:5000/entry?entryID=' + entryID, {
+            method: 'put',
+            body: updateEntry
+            })
+            .then(response  => response.json())
+            .then(data => { // Sucess response
+                
+                console.log(data);
+    
+                let entryTitle = document.getElementById('entry-title').value;
+                let entryContet = document.getElementById('entry-content').value;
+            
+                const newEntryPost = new FormData();
+                newEntryPost.append('title', entryTitle);
+                newEntryPost.append('content', entryContet);
+
+                alert('Nota atualizada com sucesso');
+                window.location.replace('showEntrys.html');
+            })
+            .catch((error) => { // Error
+                console.log('Error: ' + error);
+            })
+    }
+}
