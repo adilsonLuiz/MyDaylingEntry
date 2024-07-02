@@ -19,7 +19,6 @@ CORS(app)
 
 # Initialize
 entry_db_session = EntryDatabase()
-print(entry_db_session)
     
 # APP ROUTES
 
@@ -128,3 +127,14 @@ def update_entry(query: EntrySearchSchema, form:EntrySchema):
     result = entry_db_session.update_record(form.title, form.content, query.entryID)
     
     return result
+
+
+@app.get('/about', tags=[app_config.TAG_ABOUT_APPLICATION],
+         responses={'200': AboutInformationSchema, '404': ErrorSchema})
+def get_about_information():
+    """Get about information from application
+    """
+    
+    return {
+        'api_version': app_config.API_VERSION
+    }, 200

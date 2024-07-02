@@ -1,5 +1,4 @@
-
-body {
+.page {
     background-color: #ebffff;
     display: flex;
     justify-content: center; /* Centraliza horizontalmente */
@@ -9,7 +8,9 @@ body {
     
 
 }
-#index-logo {
+
+/* MVP LOGO manipulation*/
+#index-logo { 
     width: 30%;
     padding: 100px;
     margin: -60px;
@@ -19,7 +20,7 @@ body {
 }
 
 
-.nav-application-menu {
+.page__nav-application-menu {
 
     background-color: #ffffff;
     height: 100px;
@@ -34,7 +35,7 @@ body {
 }
 
 
-footer {
+.page__footer {
     width: 95%;
     text-align: center; /* Centraliza o texto no rodapé */
     padding: 20px;

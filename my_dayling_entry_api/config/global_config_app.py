@@ -17,7 +17,7 @@ class GlobalApplicationConfigure(GlobalDatabaseConfiguration):
         self.DEBUG = True
 
         # API Configuration
-        self.API_VERSION = '0.0.1'
+        self.API_VERSION = '0.0.2'
 
 
         # Swagger DOC Configuration TAGS
@@ -28,6 +28,7 @@ class GlobalApplicationConfigure(GlobalDatabaseConfiguration):
         self.TAG_ENTRY_SEARCH = Tag(name='Get entry Note', description='Return data from one unique Entry')
         self.TAG_ENTRY_DELETE = Tag(name='Delete entry', description='Delete entry note from database')
         self.TAG_ENTRY_UPDATE = Tag(name='Update Entry Record', description='Update any entry Record')
+        self.TAG_ABOUT_APPLICATION = Tag(name='about application', description='Describe about many informations')
         
         # Swagger DOC Configuration INFOS
         self.INFO_INFORMATION_API = Info(title='My Entry Dayling API', version=self.API_VERSION)

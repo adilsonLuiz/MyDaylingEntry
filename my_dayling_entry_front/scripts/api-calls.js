@@ -18,6 +18,9 @@ switch (path) {
     case 'showEntrys.html':
         getAllEntrys();
         break;
+    case 'about.html':
+        getAboutInformations();
+        break;
 
 }
 
@@ -213,6 +216,10 @@ function deleteEntry() {
 }
 
 
+/*
+    PUT Method
+    Get unique entryID information
+*/
 function updateEntry() {
 
     entryID = new URLSearchParams(window.location.search).get('entryID');
@@ -253,4 +260,39 @@ function updateEntry() {
                 console.log('Error: ' + error);
             })
     }
+}
+
+/*
+    GET Method
+    Get all information necessary from application
+*/
+function getAboutInformations() {
+
+    let dateNow = new Date();
+
+    
+    fetch('http://127.0.0.1:5000/about', {
+        method: 'GET'
+        })
+        .then(response  => response.json())
+        .then(data => { // Sucess response
+            
+            console.log(data);
+            
+            const timePage = document.getElementById('time-now');
+            const apiVersion = document.getElementById('api-version');
+
+
+
+            // sett informations
+            timePage.innerHTML = `<b>DATE: <b>${dateNow}`;
+            apiVersion.innerHTML = `<b>API VERSION: <b> ${data['api_version']}`;
+
+        })
+        .catch((error) => { // Error
+
+            alert('Erro ao realizar nova entrada: ' + error);
+        })
+    
+
 }

@@ -49,6 +49,7 @@ class EntryDeleteSchema(BaseModel):
     mesage: str
     entryID: str
 
+
 class EntryUpdateSchema(BaseModel):
     """Define how the default response for update entry
     """
